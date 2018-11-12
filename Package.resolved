@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftySCADKit",
+        "repositoryURL": "https://github.com/Samasaur1/SwiftySCADKit",
+        "state": {
+          "branch": "master",
+          "revision": "ac76fcd173fb116a8825a4e56c9e011149ea72eb",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
