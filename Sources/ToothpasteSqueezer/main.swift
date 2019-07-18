@@ -4,9 +4,6 @@ defer {
     OPENSCAD_print(main)
 }
 
-main = OpenSCAD.hexahedron(bottom: (.init(1, 5, 0), .init(-1, 5, 0), .init(-1, -5, 0), .init(1, -5, 0)), top: (.init(0.05, 4.05, 5), .init(-0.05, 4.05, 5), .init(-0.05, -4.05, 5), .init(0.05, -4.05, 5)))
-main.difference(from: OpenSCAD.cube(withSideLength: 10, centered: true))
-
 main = OpenSCAD.rectangularPrism(height: 3, width: 6, depth: 0.15, centered: false)
 let slope = OpenSCAD.hexahedron(bottom: (.init(-0.15, -0.15, 0), .init(-0.15, 0.30, 0), .init(6.15, 0.30, 0), .init(6.15, -0.15, 0)), top: (.init(0, 0, 1), .init(0, 0.15, 1), .init(6, 0.15, 1), .init(6, 0, 1)))
 main.union(with: slope)
