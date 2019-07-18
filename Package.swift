@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "ToothpasteSqueezer",
+    products: [
+        .executable(name: "ToothpasteSqueezer", targets: ["ToothpasteSqueezer"]),
+    ],
     dependencies: [
         .package(url: "https://github.com/Samasaur1/SwiftySCADKit", .branch("master")),
     ],
