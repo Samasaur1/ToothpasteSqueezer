@@ -66,7 +66,7 @@ gripCornerRounder.translate(by: cornerRoundingRadius, cornerRoundingRadius, 0)
 gripCornerRounder.difference(from: .rectangularPrism(height: dimensions.depth, width: cornerRoundingRadius, depth: cornerRoundingRadius, centered: false))
 gripCornerRounder.union(with: gripCornerRounder.mirrored(across: 1, 0, 0).translated(by: -3 + (0.25 * cornerRoundingRadius), 0, 0))
 gripCornerRounder.rotate(by: -90, 0, 0)
-gripCornerRounder.translate(by: padding + 4.65 - (0.125 * cornerRoundingRadius), 0, dimensions.height)
+gripCornerRounder.translate(by: padding + toothpasteWidth + (slopeHorizontalDistance * 2) - 1.65 - (0.125 * cornerRoundingRadius), 0, dimensions.height)
 
 main = verticalCornerRounder.differenced(from: main)
 main = widthCornerRounder.differenced(from: main)
