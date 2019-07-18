@@ -7,8 +7,11 @@ defer {
 print("Input gap")
 let gapDepth: Double = Double(readLine() ?? "0.15") ?? 0.15
 
+print("Input slope horizontal distance (distance from hole projection to slope)")
+let slopeHorizontalDistance = 0.15
+
 main = OpenSCAD.rectangularPrism(height: 3, width: 6, depth: gapDepth, centered: false)
-let slope = OpenSCAD.hexahedron(bottom: (.init(-0.15, -0.15, 0), .init(-0.15, gapDepth + 0.15, 0), .init(6.15, gapDepth + 0.15, 0), .init(6.15, -0.15, 0)), top: (.init(0, 0, 1), .init(0, gapDepth, 1), .init(6, gapDepth, 1), .init(6, 0, 1)))
+let slope = OpenSCAD.hexahedron(bottom: (.init(-slopeHorizontalDistance, -slopeHorizontalDistance, 0), .init(-slopeHorizontalDistance, gapDepth + slopeHorizontalDistance, 0), .init(6 + slopeHorizontalDistance, gapDepth + slopeHorizontalDistance, 0), .init(6 + slopeHorizontalDistance, -slopeHorizontalDistance, 0)), top: (.init(0, 0, 1), .init(0, gapDepth, 1), .init(6, gapDepth, 1), .init(6, 0, 1)))
 main.union(with: slope)
 
 print("Input padding")
@@ -22,9 +25,9 @@ cutout.scale(to: 3/4, 1, 1)
 cutout.translate(by: 3-1.5, (gapDepth / 2)-(cutoutHeight/2), 3-2)
 cutout.translate(by: 0, 0, 0.1) //so that the slope and cutout don't touch
 main.union(with: cutout)
-main.translate(by: 0.15, 0.15, 0)
+main.translate(by: slopeHorizontalDistance, slopeHorizontalDistance, 0)
 
-let dimensions = (height: 3.0, width: 6.3 + (padding * 2), depth: 0.3 + gapDepth + (padding * 2))
+let dimensions = (height: 3.0, width: 6 + (slopeHorizontalDistance * 2) + (padding * 2), depth: (slopeHorizontalDistance * 2) + gapDepth + (padding * 2))
 var minuend = OpenSCAD.rectangularPrism(height: dimensions.height, width: dimensions.width, depth: dimensions.depth, centered: false)
 minuend.translate(by: -padding, -padding, 0)
 main.difference(from: minuend)
