@@ -4,21 +4,28 @@ defer {
     OPENSCAD_print(main)
 }
 
+var args: [Double] = []
+for argument in CommandLine.arguments.dropFirst() {
+    if let d = Double(argument) {
+        args.append(d)
+    }
+}
+
 print("Input gap")
-let gapDepth: Double = Double(readLine() ?? "0.15") ?? 0.15
+let gapDepth: Double = args.first != nil ? args.removeFirst() : Double(readLine() ?? "0.15") ?? 0.15
 
 print("Input slope horizontal distance (distance from hole projection to slope)")
-let slopeHorizontalDistance: Double = Double(readLine() ?? "0.15") ?? 0.15
+let slopeHorizontalDistance: Double = args.first != nil ? args.removeFirst() : Double(readLine() ?? "0.15") ?? 0.15
 
 print("Input toothpaste width (Including \"wiggle room\", i.e. don't just measure it, add some space)")
-let toothpasteWidth: Double = Double(readLine() ?? "6.0") ?? 6.0//Including "wiggle room", i.e. don't just measure it, add some space.
+let toothpasteWidth: Double = args.first != nil ? args.removeFirst() : Double(readLine() ?? "6.0") ?? 6.0//Including "wiggle room", i.e. don't just measure it, add some space.
 
 main = OpenSCAD.rectangularPrism(height: 3, width: toothpasteWidth, depth: gapDepth, centered: false)
 let slope = OpenSCAD.hexahedron(bottom: (.init(-slopeHorizontalDistance, -slopeHorizontalDistance, 0), .init(-slopeHorizontalDistance, gapDepth + slopeHorizontalDistance, 0), .init(toothpasteWidth + slopeHorizontalDistance, gapDepth + slopeHorizontalDistance, 0), .init(toothpasteWidth + slopeHorizontalDistance, -slopeHorizontalDistance, 0)), top: (.init(0, 0, 1), .init(0, gapDepth, 1), .init(toothpasteWidth, gapDepth, 1), .init(toothpasteWidth, 0, 1)))
 main.union(with: slope)
 
 print("Input padding")
-let padding: Double = Double(readLine() ?? "0.25") ?? 0.25
+let padding: Double = args.first != nil ? args.removeFirst() : Double(readLine() ?? "0.25") ?? 0.25
 
 let cutoutHeight = 5.0 + (padding * 2) // so that extreme padding values still have the full cutout
 var cutout = OpenSCAD.cylinder(height: cutoutHeight, topRadius: 2, bottomRadius: 2, centered: true)
@@ -37,7 +44,7 @@ main.difference(from: minuend)
 main.translate(by: padding, padding, 0)
 
 print("Input corner rounding (radius of the cylinder used to round)")
-let cornerRoundingRadius: Double = Double(readLine() ?? "0.2") ?? 0.2
+let cornerRoundingRadius: Double = args.first != nil ? args.removeFirst() : Double(readLine() ?? "0.2") ?? 0.2
 
 var verticalCornerRounder = OpenSCAD.cylinder(height: dimensions.height, topRadius: cornerRoundingRadius, bottomRadius: cornerRoundingRadius, centered: false)
 verticalCornerRounder.translate(by: cornerRoundingRadius, cornerRoundingRadius, 0)
