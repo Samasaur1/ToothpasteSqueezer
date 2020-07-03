@@ -5,8 +5,8 @@
         "package": "SwiftySCADKit",
         "repositoryURL": "https://github.com/Samasaur1/SwiftySCADKit",
         "state": {
-          "branch": "master",
-          "revision": "eff523c9d15031756e902f6b6f811d5639fafdc5",
+          "branch": "dsl",
+          "revision": "bc8d15f5fef9aab91be4b7fce766f79b6e03c39f",
           "version": null
         }
       }
