@@ -22,7 +22,7 @@ let cutoutHeight = 1 + gapDepth + (padding * 2) + (slopeHorizontalDistance * 2) 
 let dimensions = (height: 3.0, width: toothpasteWidth + (slopeHorizontalDistance * 2) + (padding * 2), depth: (slopeHorizontalDistance * 2) + gapDepth + (padding * 2))
 
 struct ToothpasteSqueezer: OpenSCAD {
-    var body: some OpenSCAD {
+    var body: OpenSCAD {
         Difference(from: {
             Translate(by: padding, padding, 0) {
                 Difference(from: {
@@ -43,7 +43,7 @@ struct ToothpasteSqueezer: OpenSCAD {
         }
     }
 
-    var inside: some OpenSCAD {
+    var inside: OpenSCAD {
         Translate(by: slopeHorizontalDistance, slopeHorizontalDistance, 0) {
             Union {
                 Union {
@@ -55,7 +55,7 @@ struct ToothpasteSqueezer: OpenSCAD {
         }
     }
 
-    var cutout: some OpenSCAD {
+    var cutout: OpenSCAD {
         Translate(by: 0, 0, 0.1) { //so that the slope and cutout don't touch
             Translate(by: (toothpasteWidth/2)-1.5, (gapDepth / 2)-(cutoutHeight/2), 3-2) {
                 Scale(by: 3/4, 1, 1) {
@@ -73,7 +73,7 @@ struct ToothpasteSqueezer: OpenSCAD {
 }
 
 struct VerticalCornerRounder: OpenSCAD {
-    var body: some OpenSCAD {
+    var body: OpenSCAD {
         Union {
             dualVerticalCornerRounder
             Translate(by: 0, dimensions.depth, 0) {
@@ -84,7 +84,7 @@ struct VerticalCornerRounder: OpenSCAD {
         }
     }
 
-    var dualVerticalCornerRounder: some OpenSCAD {
+    var dualVerticalCornerRounder: OpenSCAD {
         Union {
             singleVerticalCornerRounder
             Translate(by: dimensions.width, 0, 0) {
@@ -95,7 +95,7 @@ struct VerticalCornerRounder: OpenSCAD {
         }
     }
 
-    var singleVerticalCornerRounder: some OpenSCAD {
+    var singleVerticalCornerRounder: OpenSCAD {
         Difference(from: {
             RectangularPrism(height: dimensions.height, width: cornerRoundingRadius, depth: cornerRoundingRadius, centered: false)
         }) {
@@ -106,7 +106,7 @@ struct VerticalCornerRounder: OpenSCAD {
     }
 }
 struct WidthCornerRounder: OpenSCAD {
-    var body: some OpenSCAD {
+    var body: OpenSCAD {
         Translate(by: 0, 0, dimensions.height) {
             Rotate(by: 0, 90, 0) {
                 Union {
@@ -121,7 +121,7 @@ struct WidthCornerRounder: OpenSCAD {
         }
     }
 
-    var dualWidthCornerRounder: some OpenSCAD {
+    var dualWidthCornerRounder: OpenSCAD {
         Union {
             singleWidthCornerRounder
             Translate(by: dimensions.height, 0, 0) {
@@ -132,7 +132,7 @@ struct WidthCornerRounder: OpenSCAD {
         }
     }
 
-    var singleWidthCornerRounder: some OpenSCAD {
+    var singleWidthCornerRounder: OpenSCAD {
         Difference(from: {
             RectangularPrism(height: dimensions.width, width: cornerRoundingRadius, depth: cornerRoundingRadius, centered: false)
         }) {
@@ -143,7 +143,7 @@ struct WidthCornerRounder: OpenSCAD {
     }
 }
 struct DepthCornerRounder: OpenSCAD {
-    var body: some OpenSCAD {
+    var body: OpenSCAD {
         Translate(by: 0, 0, dimensions.height) {
             Rotate(by: -90, 0, 0) {
                 Union {
@@ -158,7 +158,7 @@ struct DepthCornerRounder: OpenSCAD {
         }
     }
 
-    var dualDepthCornerRounder: some OpenSCAD {
+    var dualDepthCornerRounder: OpenSCAD {
         Union {
             singleDepthCornerRounder
             Translate(by: dimensions.width, 0, 0) {
@@ -169,7 +169,7 @@ struct DepthCornerRounder: OpenSCAD {
         }
     }
 
-    var singleDepthCornerRounder: some OpenSCAD {
+    var singleDepthCornerRounder: OpenSCAD {
         Difference(from: {
             RectangularPrism(height: dimensions.depth, width: cornerRoundingRadius, depth: cornerRoundingRadius, centered: false)
         }) {
@@ -180,7 +180,7 @@ struct DepthCornerRounder: OpenSCAD {
     }
 }
 struct GripCornerRounder: OpenSCAD {
-    var body: some OpenSCAD {
+    var body: OpenSCAD {
         Translate(by: padding + (toothpasteWidth / 2) + slopeHorizontalDistance + 1.5 - (0.125 * cornerRoundingRadius), 0, dimensions.height) {
             Rotate(by: -90, 0, 0) {
                 Union {
@@ -195,7 +195,7 @@ struct GripCornerRounder: OpenSCAD {
         }
     }
 
-    var singleGripCornerRounder: some OpenSCAD {
+    var singleGripCornerRounder: OpenSCAD {
         Difference(from: {
             RectangularPrism(height: dimensions.depth, width: cornerRoundingRadius, depth: cornerRoundingRadius, centered: false)
         }) {
